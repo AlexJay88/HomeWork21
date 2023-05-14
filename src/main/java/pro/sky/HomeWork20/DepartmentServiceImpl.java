@@ -15,6 +15,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         this.employeeService = employeeService;
     }
 
+
     @Override
     public Employee getEmployeeWithMaxSalary(Integer departmentId) {
         return employeeService.getAllEmployees().values().stream()

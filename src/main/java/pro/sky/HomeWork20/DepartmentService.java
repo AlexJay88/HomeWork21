@@ -8,3 +8,4 @@ public interface DepartmentService {
     Employee getEmployeeWithMinSalary(Integer departmentId);
     Map<Integer, List<Employee>> getDivisionByDepartmentEmployees(Integer departmentId);
 }
+

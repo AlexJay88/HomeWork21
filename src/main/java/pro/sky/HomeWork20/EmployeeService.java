@@ -8,3 +8,4 @@ public interface EmployeeService {
     pro.sky.HomeWork20.Employee findEmployee(String firstName, String lastName);
     Map<String, pro.sky.HomeWork20.Employee> getAllEmployees();
 }
+
