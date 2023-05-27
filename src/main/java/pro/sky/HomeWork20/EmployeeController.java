@@ -1,5 +1,7 @@
 package pro.sky.HomeWork20;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,14 +22,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam("firstName") String firstName,
-                                @RequestParam("lastName") String lastName,
-                                @RequestParam ("salary") Integer salary,
-                                @RequestParam("departmentId") Integer department)
-    {
-        return employeeService.addEmployee(firstName, lastName,salary,department);
+    public ResponseEntity<Employee> addEmployee(@RequestParam("firstName") String firstName,
+                                               @RequestParam("lastName") String lastName)
 
-    }
+
+
+    {
+        if(validate(firstName,lastName)){
+        return ResponseEntity.ok(employeeService.addEmployee(firstName,lastName));
+
+    }else {
+            return ResponseEntity.badRequest().build();
+        }
+        }
 
     @GetMapping("/remove")
     public void removeEmployee(@RequestParam String firstName, @RequestParam String lastName) {
@@ -59,5 +66,8 @@ public class EmployeeController {
         System.out.println("numbersMap.toString() = " + numbersMap.toString());
 
     }
-
+    public static boolean validate(String firstName,String lastName){
+        return StringUtils.isAlpha(firstName)&& StringUtils.isAlpha(lastName);
+    }
 }
+
