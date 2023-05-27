@@ -1,5 +1,6 @@
 package pro.sky.HomeWork20;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,16 +10,15 @@ public class Employee {
     private String firstName;
     private String lastName;
 
-    private final Integer salary;
-
-    private final Integer department;
 
 
-    public Employee(String firstName, String lastName, Integer salary, Integer department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.department = department;
+
+
+
+    public Employee(String firstName, String lastName) {
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase());
+
     }
 
 
@@ -40,25 +40,22 @@ public class Employee {
     }
 
 
-    public Integer getSalary() {
-        return salary;
-    }
 
-    public Integer getDepartment() {
-        return department;
-    }
+
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(salary, employee.salary) && Objects.equals(department, employee.department);
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, salary, department);
+        return Objects.hash(firstName, lastName);
     }
 
     @Override
@@ -66,11 +63,12 @@ public class Employee {
         return "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", salary=" + salary +
-                ", department=" + department +
+
                 '}';
     }
 }
+
+
 
 
 
